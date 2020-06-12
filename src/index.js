@@ -8,7 +8,8 @@ const init = () => {
   const settings = {
     offerCount: 312,
   };
-  ReactDOM.render(<App offerCount={settings.offerCount}/>, document.querySelector(`#root`));
+  const placeDescribes = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`];
+  ReactDOM.render(<App offerCount={settings.offerCount} placeDescribes={placeDescribes}/>, document.querySelector(`#root`));
 };
 
 init();
