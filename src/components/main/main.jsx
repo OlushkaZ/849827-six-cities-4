@@ -3,7 +3,7 @@ import PlaceCard from "../place-card/place-card.jsx";
 import PropTypes from "prop-types";
 
 const Main = (props) => {
-  const {offerCount, placeDescribes} = props;
+  const {offerCount, placeDescribes, onTitlePlaceCardClick} = props;
   return <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -94,7 +94,7 @@ const Main = (props) => {
                 */}
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {placeDescribes.map((it, i) => <PlaceCard key={i} describe={it} />)}
+              {placeDescribes.map((it, i) => <PlaceCard key={i} describe={it} onTitleClick={onTitlePlaceCardClick}/>)}
             </div>
           </section>
           <div className="cities__right-section">
@@ -108,7 +108,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   offerCount: PropTypes.number.isRequired,
-  placeDescribes: PropTypes.arrayOf(PropTypes.string.isRequired)
+  placeDescribes: PropTypes.arrayOf(PropTypes.string.isRequired),
+  onTitlePlaceCardClick: PropTypes.func,
 };
 
 export default Main;
