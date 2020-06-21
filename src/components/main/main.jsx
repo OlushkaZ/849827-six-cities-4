@@ -1,9 +1,9 @@
 import React from "react";
-import PlaceCard from "../place-card/place-card.jsx";
+import PlaceList from "../place-list/place-list.jsx";
 import PropTypes from "prop-types";
 
 const Main = (props) => {
-  const {offerCount, placeDescribes, onTitlePlaceCardClick} = props;
+  const {offers, onTitlePlaceCardClick} = props;
   return <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -69,7 +69,7 @@ const Main = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offerCount} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -93,9 +93,8 @@ const Main = (props) => {
                 </select>
                 */}
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {placeDescribes.map((it, i) => <PlaceCard key={i} describe={it} onTitleClick={onTitlePlaceCardClick}/>)}
-            </div>
+            <PlaceList offers = {offers}
+              onTitlePlaceCardClick = {onTitlePlaceCardClick}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map" />
@@ -107,8 +106,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offerCount: PropTypes.number.isRequired,
-  placeDescribes: PropTypes.arrayOf(PropTypes.string.isRequired),
+  offers: PropTypes.array.isRequired,
   onTitlePlaceCardClick: PropTypes.func,
 };
 
