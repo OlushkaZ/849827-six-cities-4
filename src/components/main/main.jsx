@@ -1,9 +1,15 @@
 import React from "react";
 import PlaceList from "../place-list/place-list.jsx";
 import PropTypes from "prop-types";
+import Map from '../map/map.jsx';
+// import withMapState from "../../hocs/with-map-state/with-map-state.js";
+
+
+// const MapWrapped = withMapState(Map);
 
 const Main = (props) => {
   const {offers, onTitlePlaceCardClick} = props;
+  const coordinates = offers.map((offer)=>offer.coordinates);
   return <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -97,7 +103,9 @@ const Main = (props) => {
               onTitlePlaceCardClick = {onTitlePlaceCardClick}/>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map" />
+            <section className="cities__map map">
+              <Map coordinates = {coordinates}/>
+            </section>
           </div>
         </div>
       </div>
