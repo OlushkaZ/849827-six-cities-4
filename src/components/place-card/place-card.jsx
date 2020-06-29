@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PlaceType} from "../../const.js";
+import {PlaceType} from "../../constants/const.js";
 
 const PlaceCard = (props) => {
+  const handleCardHover = (id)=>{
+    // const {target} = evt;
+    // evt.preventDefault();
+    onUserHover(id);
+  };
   const recalcAsPercent = (num)=>{
     return num * 20;
   };

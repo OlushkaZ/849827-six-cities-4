@@ -1,16 +1,16 @@
 import React from "react";
 import Main from "../main/main.jsx";
-import PropTypes from "prop-types";
+import withHoveredCard from "../../hocs/with-hovered-card/with-hovered-card.js";
+// import PropTypes from "prop-types";
 
-const App = (props) => {
-  return <Main
-    offers = {props.offers}
-    onTitlePlaceCardClick={props.onTitlePlaceCardClick}/>;
+const App = () => {
+  const MainWrapped = withHoveredCard(Main);
+  return <MainWrapped/>;
 };
 
-App.propTypes = {
-  offers: PropTypes.array.isRequired,
-  onTitlePlaceCardClick: PropTypes.func,
-};
+// App.propTypes = {
+//   offers: PropTypes.array.isRequired,
+//   onTitlePlaceCardClick: PropTypes.func,
+// };
 
 export default App;

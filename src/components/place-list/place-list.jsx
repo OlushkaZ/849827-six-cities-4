@@ -10,7 +10,7 @@ class PlaceList extends PureComponent {
     };
   }
   render() {
-    const {offers, onTitlePlaceCardClick} = this.props;
+    const {offers, onTitlePlaceCardClick, onUserHover} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((it) => <PlaceCard key={it.id}
         id = {it.id}
@@ -22,9 +22,11 @@ class PlaceList extends PureComponent {
         type = {it.type}
         rating = {it.rating}
         onTitleClick={onTitlePlaceCardClick}
-        onUserHover = {(id)=>{
-          this.setState({hoveredCardId: id});
-        }}/>)}
+        // onUserHover = {(id)=>{
+        //   this.setState({hoveredCardId: id});
+        // }}
+        onUserHover = {onUserHover}
+      />)}
     </div>;
   }
 }
@@ -32,5 +34,6 @@ class PlaceList extends PureComponent {
 PlaceList.propTypes = {
   offers: PropTypes.array.isRequired,
   onTitlePlaceCardClick: PropTypes.func,
+  onUserHover: PropTypes.func,
 };
 export default PlaceList;
