@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 const Locations = (props) =>{
-  const {cities, currentCity, onLocationClick} = props;
-  const isActiveSity = (city) => {
-    return currentCity === city;
-  };
+  const {cities, onLocationClick} = props;
+  // const isActiveSity = (city) => {
+  //   return currentCity === city;
+  // };
   const handleTabClick = (evt)=>{
     const {target} = evt;
     evt.preventDefault();
@@ -15,8 +15,8 @@ const Locations = (props) =>{
       <ul className="locations__list tabs__list">
         {cities.map((city, ind)=>{
           return <li key={ind} className="locations__item">
-            <a className= {`locations__item-link tabs__item ${isActiveSity(city) && `tabs__item--active`}`} href="#" onClick = {handleTabClick}>
-              <span>{city}</span>
+            <a className= {`locations__item-link tabs__item ${city.isActive && `tabs__item--active`}`} href="#" onClick = {handleTabClick}>
+              <span>{city.cityName}</span>
             </a>
           </li>;
         })}
@@ -26,8 +26,7 @@ const Locations = (props) =>{
 };
 
 Locations.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string),
+  cities: PropTypes.arrayOf(PropTypes.object),
   onLocationClick: PropTypes.func,
-  currentCity: PropTypes.string
 };
 export default Locations;

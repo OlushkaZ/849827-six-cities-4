@@ -20,10 +20,14 @@ const Main = (props) => {
   const choosedByCityOffers = chooseOffersByCity(currentCity, offers);
 
   const getCities = () => {
-    const cities = offers.map(({city})=>city);
-    return cities.filter((item, pos)=>{
+    let cities = offers.map(({city})=>city);
+    cities = cities.filter((item, pos)=>{
       return cities.indexOf(item) === pos;
     }).slice(0, CITY_COUNT);
+    return cities.map((city)=>({
+      cityName: city,
+      isActive: city === currentCity,
+    }));
   };
   return <div className="page page--gray page--main">
     <header className="header">
@@ -52,7 +56,6 @@ const Main = (props) => {
       <h1 className="visually-hidden">Cities</h1>
       <Locations
         cities = {getCities()}
-        currentCity = {currentCity}
         onLocationClick = {onLocationClick}
       />
       <div className="cities">

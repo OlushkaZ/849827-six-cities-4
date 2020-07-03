@@ -15,7 +15,8 @@ const Cities = (props) => {
       onTitlePlaceCardClick = {onTitlePlaceCardClick}
       onUserHover = {onUserHover}
       placeCount = {choosedByCityOffers.length}
-      currentCity = {currentCity}/>
+      currentCity = {currentCity}
+      classes={Classes.MAIN}/>
     <div className="cities__right-section">
       {<Map
         pins={coordinates}

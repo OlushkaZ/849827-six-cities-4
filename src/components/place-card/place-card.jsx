@@ -11,8 +11,8 @@ const PlaceCard = (props) => {
   const recalcAsPercent = (num)=>{
     return num * 20;
   };
-  const {id, name, price, isFavorite, isPremium, srcImg, type, rating, onTitleClick, onUserHover} = props;
-  return <article className="cities__place-card place-card" onMouseEnter = {()=>onUserHover(id)} onMouseLeave = {()=>onUserHover(null)}>
+  const {id, name, price, isFavorite, isPremium, srcImg, type, rating, onTitleClick, onUserHover, classes} = props;
+  return <article className={`${classes.card}card place-card`} onMouseEnter = {()=>handleCardHover(id)} onMouseLeave = {()=>handleCardHover(null)}>
     {isPremium ? <div className="place-card__mark">
       <span>Premium</span>
     </div> : ``}
@@ -59,7 +59,8 @@ PlaceCard.propTypes = {
   rating: PropTypes.oneOf([1, 2, 3, 4, 5]),
   type: PropTypes.oneOf([PlaceType.APARTMENT, PlaceType.PRIVATE_ROOM]).isRequired,
   onTitleClick: PropTypes.func,
-  onUserHover: PropTypes.func
+  onUserHover: PropTypes.func,
+  classes: PropTypes.object,
 };
 
 export default PlaceCard;

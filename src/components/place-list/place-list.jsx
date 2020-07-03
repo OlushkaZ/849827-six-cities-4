@@ -10,7 +10,7 @@ class PlaceList extends PureComponent {
     };
   }
   render() {
-    const {offers, onTitlePlaceCardClick, onUserHover, placeCount, currentCity} = this.props;
+    const {offers, onTitlePlaceCardClick, onUserHover, placeCount, currentCity, classes} = this.props;
     return <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{placeCount} places to stay in {currentCity}</b>
@@ -48,6 +48,7 @@ class PlaceList extends PureComponent {
           type = {it.type}
           rating = {it.rating}
           onTitleClick={onTitlePlaceCardClick}
+          classes={classes}
           // onUserHover = {(id)=>{
           //   this.setState({hoveredCardId: id});
           // }}
@@ -63,6 +64,7 @@ PlaceList.propTypes = {
   onTitlePlaceCardClick: PropTypes.func,
   onUserHover: PropTypes.func,
   placeCount: PropTypes.number,
-  currentCity: PropTypes.string
+  currentCity: PropTypes.string,
+  classes: PropTypes.object,
 };
 export default PlaceList;
