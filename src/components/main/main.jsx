@@ -2,7 +2,7 @@ import React from "react";
 // import PlaceList from "../place-list/place-list.jsx";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/reducer.js";
 import Cities from '../cities/cities.jsx';
 import Locations from '../locations/locations.jsx';
 import {CITY_COUNT} from "../../constants/const.js";
@@ -16,7 +16,7 @@ const CitiesWrapper = withHoveredCard(Cities);
 // const MapWrapped = withMapState(Map);
 
 const Main = (props) => {
-  const {currentCity, offers, onTitlePlaceCardClick = ()=>{}} = props;
+  const {currentCity, offers, onTitlePlaceCardClick = ()=>{}, onLocationClick} = props;
   const choosedByCityOffers = chooseOffersByCity(currentCity, offers);
 
   const getCities = () => {
@@ -53,7 +53,7 @@ const Main = (props) => {
       <Locations
         cities = {getCities()}
         currentCity = {currentCity}
-        onLocationClick = {()=>{}}
+        onLocationClick = {onLocationClick}
       />
       <div className="cities">
         <CitiesWrapper
@@ -71,7 +71,8 @@ Main.propTypes = {
   onTitlePlaceCardClick: PropTypes.func,
   currentCity: PropTypes.string,
   onUserHover: PropTypes.func,
-  hoveredCardId: PropTypes.number
+  hoveredCardId: PropTypes.number,
+  onLocationClick: PropTypes.func,
 };
 
 // export default Main;
@@ -80,16 +81,16 @@ const mapStateToProps = (state) => ({
   offers: state.offers,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   onWelcomeButtonClick() {
-//     dispatch(ActionCreator.incrementStep());
-//   },
-//   onUserAnswer(question, answer) {
-//     dispatch(ActionCreator.incrementMistake(question, answer));
-//     dispatch(ActionCreator.incrementStep());
-//   },
-// });
+const mapDispatchToProps = (dispatch) => ({
+  onLocationClick(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+  // onUserAnswer(question, answer) {
+  //   dispatch(ActionCreator.incrementMistake(question, answer));
+  //   dispatch(ActionCreator.incrementStep());
+  // },
+});
 
 
 export {Main};
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
