@@ -29,6 +29,7 @@ it(`snapshot placeCard`, () => {
       rating = {offer.rating}
       onUserHover = {()=>{}}
       onTitleClick={()=>{}}
+      classes = {{card: ``}}
     />)
     .toJSON();
 

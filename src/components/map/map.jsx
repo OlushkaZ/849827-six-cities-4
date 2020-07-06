@@ -1,42 +1,91 @@
-import leaflet from "leaflet";
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-class Map extends React.PureComponent {
+import leaflet from "leaflet";
+import {createRef} from "react";
+import {ZOOM} from "../../constants/const.js";
+
+// const ZOOM = 12;
+
+
+export default class Map extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._map = null;
+    this._pinIcon = this._getPinIcon();
+    this._activePinIcon = this._getPinIcon(true);
+    this._mapRef = createRef();
+  }
+
+  componentDidUpdate() {
+    this._addPins();
   }
 
   componentDidMount() {
-    const {coordinates} = this.props;
-    const city = [52.38333, 4.9];
-    const icon = leaflet.icon({
-      iconUrl: `./img/pin.svg`,
-      iconSize: [30, 30]
-    });
-    const zoom = 12;
-    const map = leaflet.map(`map`, {
+    this._map = this._createMap();
+    this._setView();
+    this._connectLayer();
+    this._addPins();
+
+  }
+
+  componentWillUnmount() {
+    this._mapRef.current.remove();
+  }
+
+  _createMap() {
+    const {cityCoordinates: city} = this.props;
+
+    return leaflet.map(this._mapRef.current, {
       center: city,
-      zoom,
+      zoom: ZOOM,
       zoomControl: true,
       marker: true
     });
-    // map.setView(city, zoom);
-    leaflet
-    .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+  }
+
+  _setView() {
+    const {cityCoordinates: city} = this.props;
+    this._map.setView(city, ZOOM);
+  }
+
+  _connectLayer() {
+    leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
-    .addTo(map);
+    .addTo(this._map);
+  }
 
-    coordinates.forEach((item) => {
-      leaflet.marker(item, {icon}).addTo(map);
+  _getPinIcon(isActive = false) {
+    return leaflet.icon({
+      iconUrl: isActive ? `img/pin-active.svg` : `img/pin.svg`,
+      iconSize: [30, 30]
     });
   }
 
+  _addPins() {
+    const {pins} = this.props;
+
+    pins.forEach((pin) => {
+      leaflet.marker(pin.coordinates, {
+        icon: pin.isActive ? this._activePinIcon : this._pinIcon,
+      }).addTo(this._map);
+    });
+  }
+
+
   render() {
-    return <div style={{height: `100%`}} id="map"></div>;
+    const {classes} = this.props;
+    return (
+      <section className={`${classes.map}__map map`} ref={this._mapRef}>
+        <div id="map"></div>
+      </section>
+    );
   }
 }
+
 Map.propTypes = {
-  coordinates: PropTypes.array.isRequired
+  pins: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cityCoordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  classes: PropTypes.object.isRequired,
 };
-export default Map;
