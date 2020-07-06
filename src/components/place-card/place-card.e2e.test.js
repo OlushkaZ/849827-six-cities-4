@@ -35,6 +35,7 @@ describe(`placeCardComponent`, () => {
           rating = {offer.rating}
           onUserHover = {()=>{}}
           onTitleClick={onTitleClick}
+          classes = {{card: ``}}
         />
     );
 
@@ -64,6 +65,7 @@ describe(`placeCardComponent`, () => {
       rating = {offer.rating}
       onTitleClick={()=>{}}
       onUserHover = {onUserHover}
+      classes = {{card: ``}}
     />);
 
     const card = placeCard.find(`.place-card`);
