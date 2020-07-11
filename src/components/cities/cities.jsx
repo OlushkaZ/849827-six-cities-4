@@ -1,7 +1,7 @@
 import React from "react";
 import PlaceList from "../place-list/place-list.jsx";
 import Map from "../map/map.jsx";
-import {Classes} from "../../constants/pages.js";
+import {CardClasses} from "../../constants/const.js";
 import PropTypes from "prop-types";
 const Cities = (props) => {
   const {currentCity, choosedByCityOffers, onTitlePlaceCardClick, hoveredCardId, onUserHover} = props;
@@ -16,12 +16,12 @@ const Cities = (props) => {
       onUserHover = {onUserHover}
       placeCount = {choosedByCityOffers.length}
       currentCity = {currentCity}
-      classes={Classes.MAIN}/>
+      classes={CardClasses.MAIN}/>
     <div className="cities__right-section">
       {<Map
         pins={coordinates}
         cityCoordinates={[52.38333, 4.9]}
-        classes={Classes.MAIN}/>}
+        classes={CardClasses.MAIN}/>}
     </div>
   </div>;
 };

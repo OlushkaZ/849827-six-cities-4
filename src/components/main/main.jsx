@@ -2,7 +2,7 @@ import React from "react";
 // import PlaceList from "../place-list/place-list.jsx";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/reducer.js";
+import {ActionCreator} from "../../reducer/page/page.js";
 import Cities from '../cities/cities.jsx';
 import Locations from '../locations/locations.jsx';
 import {CITY_COUNT} from "../../constants/const.js";
@@ -80,8 +80,8 @@ Main.propTypes = {
 
 // export default Main;
 const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  offers: state.offers,
+  currentCity: state.PAGE.currentCity,
+  offers: state.DATA.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,8 +4,9 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
-import {ActionCreator} from "./reducer/reducer.js";
-import {reducer} from "./reducer/reducer.js";
+import {ActionCreator as aco} from "./reducer/offers-data/offers-data.js";
+import {ActionCreator as acp} from "./reducer/page/page.js";
+import reducer from "./reducer/reducers.js";
 import offers from "./mocks/offers.js";
 
 const store = createStore(
@@ -15,8 +16,8 @@ const store = createStore(
 
 
 const init = () => {
-  store.dispatch(ActionCreator.getOffers(offers));
-  store.dispatch(ActionCreator.changeCity(offers[0].city));
+  store.dispatch(aco.getOffers(offers));
+  store.dispatch(acp.changeCity(offers[0].city));
   // reducer(ActionCreator.getOffers(offers));
   // reducer(ActionCreator.changeCity(offers[0].city));
   // const onTitlePlaceCardClick = () => {};
